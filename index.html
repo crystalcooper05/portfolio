@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crystal Cooper - Mechanical Engineer & Designer</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #1a1a1a;
+            background-color: #fafafa;
+        }
+
+        header {
+            background-color: #fff;
+            padding: 1.5rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: 600;
+            color: #2a78d6;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #1a1a1a;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #2a78d6;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        section {
+            padding: 4rem 0;
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        section:last-of-type {
+            border-bottom: none;
+        }
+
+        /* HERO SECTION */
+        #hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+            padding: 6rem 0;
+        }
+
+        .hero-text h1 {
+            font-size: 48px;
+            margin-bottom: 1rem;
+            color: #1a1a1a;
+            font-weight: 600;
+        }
+
+        .hero-text p {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .hero-image {
+            width: 100%;
+            height: 350px;
+            background: linear-gradient(135deg, #2a78d6 0%, #8b6f47 100%);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            border: 2px solid #d0d0d0;
+            overflow: hidden;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 12px 28px;
+            font-size: 16px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+
+        .btn-primary {
+            background-color: #2a78d6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: #1f5ba8;
+        }
+
+        .btn-secondary {
+            background-color: #8b6f47;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background-color: #6d5739;
+        }
+
+        /* PROJECTS SECTION */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .project-card {
+            background-color: #fff;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .project-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.15);
+        }
+
+        /* GALLERY STYLES */
+        .gallery-container {
+            position: relative;
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #2a78d6 0%, #8b6f47 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .gallery-inner {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
+
+        .gallery-slide {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .gallery-slide.active {
+            opacity: 1;
+        }
+
+        .gallery-slide img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .gallery-slide.placeholder {
+            color: white;
+            font-size: 48px;
+            background: linear-gradient(135deg, #2a78d6 0%, #8b6f47 100%);
+        }
+
+        /* GALLERY NAVIGATION */
+        .gallery-nav {
+            position: absolute;
+            bottom: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 8px;
+            z-index: 10;
+        }
+
+        .gallery-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background-color: rgba(255,255,255,0.5);
+            cursor: pointer;
+            transition: background-color 0.3s;
+            border: none;
+        }
+
+        .gallery-dot.active {
+            background-color: #fff;
+        }
+
+        .gallery-dot:hover {
+            background-color: rgba(255,255,255,0.8);
+        }
+
+        .gallery-prev, .gallery-next {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: rgba(0,0,0,0.5);
+            color: white;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 18px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+            z-index: 5;
+        }
+
+        .gallery-prev {
+            left: 10px;
+        }
+
+        .gallery-next {
+            right: 10px;
+        }
+
+        .gallery-prev:hover, .gallery-next:hover {
+            background-color: rgba(0,0,0,0.8);
+        }
+
+        .gallery-counter {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: rgba(0,0,0,0.6);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 4px;
+            font-size: 12px;
+            z-index: 5;
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-content h3 {
+            font-size: 20px;
+            margin-bottom: 0.5rem;
+            color: #2a78d6;
+        }
+
+        .project-meta {
+            font-size: 14px;
+            color: #999;
+            margin-bottom: 1rem;
+        }
+
+        .project-content p {
+            font-size: 15px;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .project-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .tag {
+            background-color: #f0f0f0;
+            color: #2a78d6;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        /* CONTACT SECTION */
+        .contact-container {
+            text-align: center;
+            padding: 3rem 0;
+        }
+
+        .contact-container h2 {
+            font-size: 36px;
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-link {
+            text-decoration: none;
+            font-size: 16px;
+            color: #2a78d6;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .contact-link:hover {
+            color: #8b6f47;
+        }
+
+        /* FOOTER */
+        footer {
+            background-color: #1a1a1a;
+            color: #fff;
+            text-align: center;
+            padding: 2rem;
+            font-size: 14px;
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 768px) {
+            #hero {
+                grid-template-columns: 1fr;
+                padding: 4rem 0;
+            }
+
+            .hero-text h1 {
+                font-size: 36px;
+            }
+
+            .nav-links {
+                gap: 1rem;
+                font-size: 14px;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            section {
+                padding: 3rem 0;
+            }
+
+            main {
+                padding: 0 1rem;
+            }
+
+            .gallery-prev, .gallery-next {
+                padding: 8px 12px;
+                font-size: 16px;
+            }
+        }
+
+        h2 {
+            font-size: 36px;
+            margin-bottom: 2rem;
+            color: #1a1a1a;
+        }
+
+        .section-title {
+            border-bottom: 3px solid #2a78d6;
+            padding-bottom: 0.5rem;
+            display: inline-block;
+        }
+
+        .resume-note {
+            background-color: #f0f7ff;
+            border-left: 4px solid #2a78d6;
+            padding: 12px;
+            margin: 1rem 0;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION HEADER -->
+    <header>
+        <nav>
+            <a href="#home" class="logo">Crystal Cooper</a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#projects">Projects</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <!-- HERO SECTION -->
+        <section id="home">
+            <div id="hero">
+                <div class="hero-text">
+                    <h1>Mechanical Engineer & Designer</h1>
+                    <p>Northwestern University | Design Concentration | GPA: 3.34</p>
+                    <p>I design mechanical systems and products that combine technical rigor with user-centered thinking. Passionate about attractions engineering, experiences design, and solving real-world problems through iteration.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">View Projects</a>
+                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    👤
+                </div>
+            </div>
+        </section>
+
+        <!-- PROJECTS SECTION -->
+        <section id="projects">
+            <h2><span class="section-title">Featured Projects</span></h2>
+            <div class="projects-grid">
+
+                <!-- PROJECT 1: GEARBOX -->
+                <div class="project-card">
+                    <div class="gallery-container">
+                        <div class="gallery-inner" id="gearbox-gallery">
+                            <div class="gallery-slide active placeholder">⚙️</div>
+                            <div class="gallery-slide placeholder">⚙️</div>
+                            <div class="gallery-slide placeholder">⚙️</div>
+                        </div>
+                        <button class="gallery-prev" onclick="changeSlide(event, 'gearbox', -1)">❮</button>
+                        <button class="gallery-next" onclick="changeSlide(event, 'gearbox', 1)">❯</button>
+                        <div class="gallery-counter"><span id="gearbox-current">1</span>/<span id="gearbox-total">3</span></div>
+                        <div class="gallery-nav" id="gearbox-dots"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Two-Stage Gear Reduction System</h3>
+                        <p class="project-meta">ME 315 Machine Design | Spring 2026</p>
+                        <p>Designed and analyzed a mechanical power transmission system transmitting 70 kW at optimized efficiency. Led Shaft B design (two-stage configuration), responsible for all structural analysis, bearing selection, and team coordination.</p>
+                        <div class="project-tags">
+                            <span class="tag">CAD Design</span>
+                            <span class="tag">FEA Analysis</span>
+                            <span class="tag">AGMA Calculations</span>
+                            <span class="tag">Mechanical Systems</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 2: BRAKE CALIPERS -->
+                <div class="project-card">
+                    <div class="gallery-container">
+                        <div class="gallery-inner" id="calipers-gallery">
+                            <div class="gallery-slide active placeholder">🔧</div>
+                            <div class="gallery-slide placeholder">🔧</div>
+                            <div class="gallery-slide placeholder">🔧</div>
+                        </div>
+                        <button class="gallery-prev" onclick="changeSlide(event, 'calipers', -1)">❮</button>
+                        <button class="gallery-next" onclick="changeSlide(event, 'calipers', 1)">❯</button>
+                        <div class="gallery-counter"><span id="calipers-current">1</span>/<span id="calipers-total">3</span></div>
+                        <div class="gallery-nav" id="calipers-dots"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3>FEA-Optimized 3D Printed Brake Calipers</h3>
+                        <p class="project-meta">MECHE 240 Mechanical Design | Spring 2025</p>
+                        <p>Iteratively optimized 3D-printed brake calipers using finite element analysis. Refined geometry to reduce deflection 8%, mass 13%, and peak stress 14% while maintaining safety compliance. Validated through physical testing.</p>
+                        <div class="project-tags">
+                            <span class="tag">FEA Optimization</span>
+                            <span class="tag">3D Printing</span>
+                            <span class="tag">Testing & Validation</span>
+                            <span class="tag">Design Iteration</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 3: SMARTREACH -->
+                <div class="project-card">
+                    <div class="gallery-container">
+                        <div class="gallery-inner" id="smartreach-gallery">
+                            <div class="gallery-slide active placeholder">♿</div>
+                            <div class="gallery-slide placeholder">♿</div>
+                            <div class="gallery-slide placeholder">♿</div>
+                        </div>
+                        <button class="gallery-prev" onclick="changeSlide(event, 'smartreach', -1)">❮</button>
+                        <button class="gallery-next" onclick="changeSlide(event, 'smartreach', 1)">❯</button>
+                        <div class="gallery-counter"><span id="smartreach-current">1</span>/<span id="smartreach-total">3</span></div>
+                        <div class="gallery-nav" id="smartreach-dots"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Accessibility-Focused Design: SmartReach</h3>
+                        <p class="project-meta">DTC 2 Design Thinking | Spring 2024</p>
+                        <p>Designed an affordable, user-centered tool enabling users with limited mobility to independently press ADA-compliant buttons. Used accordion-fold mechanics, elastic components, and accessible materials. Validated through user testing and iteration.</p>
+                        <div class="project-tags">
+                            <span class="tag">User Research</span>
+                            <span class="tag">Accessibility Design</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Design Thinking</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- CONTACT SECTION -->
+        <section id="contact">
+            <div class="contact-container">
+                <h2><span class="section-title">Get In Touch</span></h2>
+                <p style="font-size: 16px; color: #666; margin-bottom: 2rem;">I'm interested in mechanical design roles in attractions engineering, experiences design, and product development. Let's connect!</p>
+                <div class="contact-links">
+                    <a href="mailto:crystalcooper2027@u.northwestern.edu" class="contact-link">📧 Email</a>
+                    <a href="https://linkedin.com/in/crystalcooperr" target="_blank" class="contact-link">💼 LinkedIn</a>
+                </div>
+                <div class="resume-note">
+                    📄 Resume available upon request — email me and I'll send it over!
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>&copy; 2026 Crystal Cooper. Mechanical Engineering Student at Northwestern University.</p>
+    </footer>
+
+    <script>
+        /* GALLERY SYSTEM */
+
+        const galleries = {
+            gearbox: { current: 0, total: 3 },
+            calipers: { current: 0, total: 3 },
+            smartreach: { current: 0, total: 3 }
+        };
+
+        function initGallery(galleryName) {
+            const dots = document.getElementById(galleryName + '-dots');
+            const total = galleries[galleryName].total;
+            
+            for (let i = 0; i < total; i++) {
+                const dot = document.createElement('button');
+                dot.className = 'gallery-dot' + (i === 0 ? ' active' : '');
+                dot.onclick = () => goToSlide(galleryName, i);
+                dots.appendChild(dot);
+            }
+        }
+
+        function changeSlide(event, galleryName, direction) {
+            event.preventDefault();
+            const gallery = galleries[galleryName];
+            let newIndex = gallery.current + direction;
+            
+            if (newIndex < 0) newIndex = gallery.total - 1;
+            if (newIndex >= gallery.total) newIndex = 0;
+            
+            goToSlide(galleryName, newIndex);
+        }
+
+        function goToSlide(galleryName, index) {
+            const gallery = galleries[galleryName];
+            gallery.current = index;
+            
+            const slides = document.querySelectorAll(`#${galleryName}-gallery .gallery-slide`);
+            const dots = document.querySelectorAll(`#${galleryName}-dots .gallery-dot`);
+            
+            slides.forEach((slide, i) => {
+                slide.classList.toggle('active', i === index);
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+            });
+            
+            document.getElementById(galleryName + '-current').textContent = index + 1;
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            initGallery('gearbox');
+            initGallery('calipers');
+            initGallery('smartreach');
+        });
+
+        console.log("✅ Portfolio live! Replace emojis with real images later by uploading image files to GitHub.");
+    </script>
+</body>
+</html>
