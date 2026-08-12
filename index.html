@@ -90,6 +90,13 @@
             font-weight: 600;
         }
 
+        .hero-subtitle {
+            font-size: 16px;
+            color: #666;
+            margin-bottom: 0.5rem;
+            line-height: 1.6;
+        }
+
         .hero-text p {
             font-size: 18px;
             color: #666;
@@ -131,6 +138,7 @@
             text-decoration: none;
             transition: all 0.3s;
             font-weight: 500;
+            display: inline-block;
         }
 
         .btn-primary {
@@ -154,7 +162,7 @@
         /* PROJECTS SECTION */
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            grid-template-columns: repeat(2, 1fr);
             gap: 2rem;
         }
 
@@ -232,32 +240,32 @@
             height: 10px;
             border-radius: 50%;
             background-color: rgba(255,255,255,0.5);
+            border: none;
             cursor: pointer;
             transition: background-color 0.3s;
-            border: none;
         }
 
         .gallery-dot.active {
-            background-color: #fff;
-        }
-
-        .gallery-dot:hover {
-            background-color: rgba(255,255,255,0.8);
+            background-color: white;
         }
 
         .gallery-prev, .gallery-next {
             position: absolute;
             top: 50%;
             transform: translateY(-50%);
-            background-color: rgba(0,0,0,0.5);
+            background-color: rgba(0,0,0,0.4);
             color: white;
             border: none;
-            padding: 10px 15px;
+            font-size: 20px;
             cursor: pointer;
-            font-size: 18px;
+            padding: 10px 15px;
             border-radius: 4px;
             transition: background-color 0.3s;
-            z-index: 5;
+            z-index: 10;
+        }
+
+        .gallery-prev:hover, .gallery-next:hover {
+            background-color: rgba(0,0,0,0.7);
         }
 
         .gallery-prev {
@@ -268,42 +276,47 @@
             right: 10px;
         }
 
-        .gallery-prev:hover, .gallery-next:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-
         .gallery-counter {
             position: absolute;
-            top: 10px;
-            right: 10px;
-            background-color: rgba(0,0,0,0.6);
+            bottom: 15px;
+            right: 15px;
+            background-color: rgba(0,0,0,0.4);
             color: white;
             padding: 6px 12px;
             border-radius: 4px;
             font-size: 12px;
-            z-index: 5;
+            z-index: 10;
+        }
+
+        .image-caption {
+            font-size: 13px;
+            color: #999;
+            padding: 8px 12px;
+            text-align: center;
+            background-color: #fafafa;
+            border-top: 1px solid #e0e0e0;
         }
 
         .project-content {
-            padding: 2rem;
+            padding: 1.5rem;
         }
 
         .project-content h3 {
             font-size: 20px;
             margin-bottom: 0.5rem;
-            color: #2a78d6;
+            color: #1a1a1a;
         }
 
         .project-meta {
-            font-size: 14px;
+            font-size: 13px;
             color: #999;
             margin-bottom: 1rem;
         }
 
         .project-content p {
-            font-size: 15px;
+            font-size: 14px;
             color: #666;
-            margin-bottom: 1.5rem;
+            margin-bottom: 1rem;
             line-height: 1.7;
         }
 
@@ -315,35 +328,28 @@
 
         .tag {
             background-color: #f0f0f0;
-            color: #2a78d6;
-            padding: 4px 12px;
+            color: #666;
+            padding: 6px 12px;
             border-radius: 20px;
-            font-size: 13px;
-            font-weight: 500;
+            font-size: 12px;
         }
 
         /* CONTACT SECTION */
         .contact-container {
             text-align: center;
-            padding: 3rem 0;
-        }
-
-        .contact-container h2 {
-            font-size: 36px;
-            margin-bottom: 2rem;
         }
 
         .contact-links {
             display: flex;
             justify-content: center;
             gap: 2rem;
-            flex-wrap: wrap;
+            margin-bottom: 2rem;
         }
 
         .contact-link {
             text-decoration: none;
-            font-size: 16px;
             color: #2a78d6;
+            font-size: 16px;
             font-weight: 500;
             transition: color 0.3s;
         }
@@ -354,49 +360,15 @@
 
         /* FOOTER */
         footer {
-            background-color: #1a1a1a;
-            color: #fff;
+            background-color: #f5f5f5;
             text-align: center;
             padding: 2rem;
+            color: #999;
             font-size: 14px;
         }
 
-        /* RESPONSIVE */
-        @media (max-width: 768px) {
-            #hero {
-                grid-template-columns: 1fr;
-                padding: 4rem 0;
-            }
-
-            .hero-text h1 {
-                font-size: 36px;
-            }
-
-            .nav-links {
-                gap: 1rem;
-                font-size: 14px;
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            section {
-                padding: 3rem 0;
-            }
-
-            main {
-                padding: 0 1rem;
-            }
-
-            .gallery-prev, .gallery-next {
-                padding: 8px 12px;
-                font-size: 16px;
-            }
-        }
-
         h2 {
-            font-size: 36px;
+            font-size: 32px;
             margin-bottom: 2rem;
             color: #1a1a1a;
         }
@@ -437,15 +409,18 @@
             <div id="hero">
                 <div class="hero-text">
                     <h1>Mechanical Engineer & Designer</h1>
-                    <p>Northwestern University | Design Concentration | GPA: 3.34</p>
-                    <p>I design mechanical systems and products that combine technical rigor with user-centered thinking. Passionate about attractions engineering, experiences design, and solving real-world problems through iteration.</p>
+                    <div class="hero-subtitle">
+                        Northwestern University | Design Concentration | Entrepreneurship Minor<br>
+                        GPA: 3.34
+                    </div>
+                    <p>I am passionate about designing mechanical systems and products that combine technical rigor with user-centered thinking. Interested in attractions engineering, industrial design, experiences design, and solving real-world problems through iteration.</p>
                     <div class="cta-buttons">
                         <a href="#projects" class="btn btn-primary">View Projects</a>
-                        <a href="#contact" class="btn btn-secondary">Contact Me</a>
+                        <a href="resume.pdf" class="btn btn-secondary" download>Download Resume</a>
                     </div>
                 </div>
                 <div class="hero-image">
-                    👤
+                    <img src="headshot.png" alt="Crystal Cooper Headshot">
                 </div>
             </div>
         </section>
@@ -459,9 +434,15 @@
                 <div class="project-card">
                     <div class="gallery-container">
                         <div class="gallery-inner" id="gearbox-gallery">
-                            <div class="gallery-slide active placeholder">⚙️</div>
-                            <div class="gallery-slide placeholder">⚙️</div>
-                            <div class="gallery-slide placeholder">⚙️</div>
+                            <div class="gallery-slide active">
+                                <img src="gearbox-assembly.png" alt="Shaft B Assembly with Bearings and Gears">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="gearbox-diagram.png" alt="FBD of Full Three-Shaft Assembly">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="gearbox-CAD.png" alt="Shaft B Technical Drawing with Specifications">
+                            </div>
                         </div>
                         <button class="gallery-prev" onclick="changeSlide(event, 'gearbox', -1)">❮</button>
                         <button class="gallery-next" onclick="changeSlide(event, 'gearbox', 1)">❯</button>
@@ -470,7 +451,7 @@
                     </div>
                     <div class="project-content">
                         <h3>Two-Stage Gear Reduction System</h3>
-                        <p class="project-meta">ME 315 Machine Design | Spring 2026</p>
+                        <p class="project-meta">ME 315: Machine Design | Spring 2026</p>
                         <p>Designed and analyzed a mechanical power transmission system transmitting 70 kW at optimized efficiency. Led Shaft B design (two-stage configuration), responsible for all structural analysis, bearing selection, and team coordination.</p>
                         <div class="project-tags">
                             <span class="tag">CAD Design</span>
@@ -485,19 +466,28 @@
                 <div class="project-card">
                     <div class="gallery-container">
                         <div class="gallery-inner" id="calipers-gallery">
-                            <div class="gallery-slide active placeholder">🔧</div>
-                            <div class="gallery-slide placeholder">🔧</div>
-                            <div class="gallery-slide placeholder">🔧</div>
+                            <div class="gallery-slide active">
+                                <img src="calipers-final.heic" alt="Final Prototype Mounted on Bicycle">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="calipers-1stdraft.HEIC" alt="Initial Prototype Design">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="calipers-TO.png" alt="Topology Optimization Round 2 - Minimize Mass">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="calipers-FEA.png" alt="FEA Stress Analysis - Before and After Optimization">
+                            </div>
                         </div>
                         <button class="gallery-prev" onclick="changeSlide(event, 'calipers', -1)">❮</button>
                         <button class="gallery-next" onclick="changeSlide(event, 'calipers', 1)">❯</button>
-                        <div class="gallery-counter"><span id="calipers-current">1</span>/<span id="calipers-total">3</span></div>
+                        <div class="gallery-counter"><span id="calipers-current">1</span>/<span id="calipers-total">4</span></div>
                         <div class="gallery-nav" id="calipers-dots"></div>
                     </div>
                     <div class="project-content">
                         <h3>FEA-Optimized 3D Printed Brake Calipers</h3>
-                        <p class="project-meta">MECHE 240 Mechanical Design | Spring 2025</p>
-                        <p>Iteratively optimized 3D-printed brake calipers using finite element analysis. Refined geometry to reduce deflection 8%, mass 13%, and peak stress 14% while maintaining safety compliance. Validated through physical testing.</p>
+                        <p class="project-meta">ME 240: Mechanical Design | Spring 2025</p>
+                        <p>Iteratively optimized 3D-printed brake calipers using finite element analysis and topology optimization. Refined geometry to reduce deflection 8%, mass 13%, and peak stress 14% while maintaining safety compliance. Validated through physical testing.</p>
                         <div class="project-tags">
                             <span class="tag">FEA Optimization</span>
                             <span class="tag">3D Printing</span>
@@ -511,24 +501,68 @@
                 <div class="project-card">
                     <div class="gallery-container">
                         <div class="gallery-inner" id="smartreach-gallery">
-                            <div class="gallery-slide active placeholder">♿</div>
-                            <div class="gallery-slide placeholder">♿</div>
-                            <div class="gallery-slide placeholder">♿</div>
+                            <div class="gallery-slide active">
+                                <img src="smartreach-final.png" alt="Final Prototype - Complete Assembly">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="smartreach-final in use.png" alt="Final Prototype in Use - Button Access Demonstration">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="smartreach-user observation.png" alt="User Observation - Sophia in Wheelchair Environment">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="smartreach-user testing.png" alt="Mockup Testing - Iterative Design with User Feedback">
+                            </div>
                         </div>
                         <button class="gallery-prev" onclick="changeSlide(event, 'smartreach', -1)">❮</button>
                         <button class="gallery-next" onclick="changeSlide(event, 'smartreach', 1)">❯</button>
-                        <div class="gallery-counter"><span id="smartreach-current">1</span>/<span id="smartreach-total">3</span></div>
+                        <div class="gallery-counter"><span id="smartreach-current">1</span>/<span id="smartreach-total">4</span></div>
                         <div class="gallery-nav" id="smartreach-dots"></div>
                     </div>
                     <div class="project-content">
                         <h3>Accessibility-Focused Design: SmartReach</h3>
-                        <p class="project-meta">DTC 2 Design Thinking | Spring 2024</p>
+                        <p class="project-meta">DTC 2: Design Thinking | Spring 2024</p>
                         <p>Designed an affordable, user-centered tool enabling users with limited mobility to independently press ADA-compliant buttons. Used accordion-fold mechanics, elastic components, and accessible materials. Validated through user testing and iteration.</p>
                         <div class="project-tags">
                             <span class="tag">User Research</span>
                             <span class="tag">Accessibility Design</span>
                             <span class="tag">Prototyping</span>
                             <span class="tag">Design Thinking</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- PROJECT 4: FLATPACK -->
+                <div class="project-card">
+                    <div class="gallery-container">
+                        <div class="gallery-inner" id="flatpack-gallery">
+                            <div class="gallery-slide active">
+                                <img src="flatpack-final.HEIC" alt="Final Prototype - Assembled Wooden Organizer">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="flatpack-mockup.HEIC" alt="Early Cardboard and Wood Prototype">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="flatpack-CAD.png" alt="CAD Design - Isometric View of Final Assembly">
+                            </div>
+                            <div class="gallery-slide">
+                                <img src="flatpack-laser.jpeg" alt="Laser Cutting Process - Precision Manufacturing">
+                            </div>
+                        </div>
+                        <button class="gallery-prev" onclick="changeSlide(event, 'flatpack', -1)">❮</button>
+                        <button class="gallery-next" onclick="changeSlide(event, 'flatpack', 1)">❯</button>
+                        <div class="gallery-counter"><span id="flatpack-current">1</span>/<span id="flatpack-total">4</span></div>
+                        <div class="gallery-nav" id="flatpack-dots"></div>
+                    </div>
+                    <div class="project-content">
+                        <h3>Flat-Pack Vertical Utensil Organizer</h3>
+                        <p class="project-meta">DSGN 380-1: Design Studio | Spring 2026</p>
+                        <p>Designed a flat-pack vertical utensil organizer to address kitchen storage constraints. Explored multiple prototypes using cardboard, composite materials, and 1/8-inch plywood. Refined design through laser-cutting tolerance iterations and material selection. Final prototype demonstrates manufacturable design optimized for space efficiency.</p>
+                        <div class="project-tags">
+                            <span class="tag">CAD Design</span>
+                            <span class="tag">Laser Cutting</span>
+                            <span class="tag">Prototyping</span>
+                            <span class="tag">Design for Manufacturing</span>
                         </div>
                     </div>
                 </div>
@@ -546,7 +580,7 @@
                     <a href="https://linkedin.com/in/crystalcooperr" target="_blank" class="contact-link">💼 LinkedIn</a>
                 </div>
                 <div class="resume-note">
-                    📄 Resume available upon request — email me and I'll send it over!
+                    📄 Resume available for download from the hero section — click the button above!
                 </div>
             </div>
         </section>
@@ -563,8 +597,9 @@
 
         const galleries = {
             gearbox: { current: 0, total: 3 },
-            calipers: { current: 0, total: 3 },
-            smartreach: { current: 0, total: 3 }
+            calipers: { current: 0, total: 4 },
+            smartreach: { current: 0, total: 4 },
+            flatpack: { current: 0, total: 4 }
         };
 
         function initGallery(galleryName) {
@@ -612,9 +647,10 @@
             initGallery('gearbox');
             initGallery('calipers');
             initGallery('smartreach');
+            initGallery('flatpack');
         });
 
-        console.log("✅ Portfolio live! Replace emojis with real images later by uploading image files to GitHub.");
+        console.log("✅ Portfolio updated with all projects and images!");
     </script>
 </body>
 </html>
