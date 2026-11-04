@@ -1,0 +1,856 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Crystal Cooper | Mechanical Engineer & Designer</title>
+  <meta name="description" content="Crystal Cooper, mechanical engineer and designer. Designing mechanical systems and products that combine technical rigor with user-centered thinking.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@1,500;1,600&family=Cormorant+Garamond:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f6f4ef;
+      --surface: #ffffff;
+      --text: #262624;
+      --muted: #6e6d66;
+      --accent: #5d6b4a;
+      --accent-dark: #434f35;
+      --accent-soft: #e6e9dd;
+      --border: #e2dfd5;
+      --radius: 12px;
+      --font-name: "Playfair Display", Georgia, serif;
+      --font-heading: "Cormorant Garamond", Georgia, serif;
+      --font-body: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: var(--bg); color: var(--text); font-family: var(--font-body); font-size: 16px; line-height: 1.65; }
+    a { color: var(--accent-dark); }
+    img { max-width: 100%; }
+    .container { max-width: 1120px; margin: 0 auto; padding: 0 24px; }
+
+    /* Header */
+    .site-header { position: sticky; top: 0; z-index: 10; background: rgba(246,244,239,0.92); backdrop-filter: blur(6px); border-bottom: 1px solid var(--border); }
+    .site-header .container { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; padding-top: 14px; padding-bottom: 14px; }
+    .logo { font-family: var(--font-name); font-style: italic; font-weight: 600; font-size: 1.35rem; color: var(--text); text-decoration: none; }
+    .site-nav { display: flex; gap: 28px; }
+    .site-nav a { color: var(--text); text-decoration: none; font-size: 0.95rem; font-weight: 500; padding-bottom: 3px; border-bottom: 2px solid transparent; }
+    .site-nav a.active, .site-nav a:hover { color: var(--accent-dark); border-bottom-color: var(--accent); }
+    .btn { display: inline-block; padding: 9px 20px; border-radius: 999px; text-decoration: none; font-size: 0.92rem; font-weight: 600; border: 1px solid var(--accent); color: var(--accent-dark); background: transparent; transition: background 0.15s ease, color 0.15s ease; }
+    .btn:hover { background: var(--accent); color: #fff; }
+    .btn-solid { background: var(--accent); color: #fff; }
+    .btn-solid:hover { background: var(--accent-dark); border-color: var(--accent-dark); }
+
+    /* Pages */
+    .page { display: none; }
+    .page.show { display: block; }
+
+    /* Type */
+    .eyebrow { font-size: 0.78rem; font-weight: 600; letter-spacing: 0.18em; text-transform: uppercase; color: var(--accent); margin: 0 0 10px; }
+    h1, h2, h3 { font-family: var(--font-heading); font-weight: 600; line-height: 1.15; margin: 0; }
+    .section { padding: 64px 0 8px; }
+    .section-head { display: flex; align-items: baseline; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-bottom: 28px; }
+    .section-head h2 { font-size: clamp(2rem, 4vw, 2.6rem); }
+    .section-head p { margin: 0; color: var(--muted); font-size: 0.95rem; }
+    .page-top { padding: 56px 0 8px; }
+    .page-top h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); }
+
+    /* Hero */
+    .hero { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.25fr); gap: 56px; align-items: center; padding: 64px 0 24px; }
+    .hero-photo { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 200px 200px var(--radius) var(--radius); background: var(--accent-soft); display: block; box-shadow: 0 18px 40px rgba(38,38,36,0.12); }
+    .hero h1 { font-family: var(--font-name); font-style: italic; font-weight: 500; font-size: clamp(2.8rem, 6vw, 4.4rem); letter-spacing: -0.01em; margin-bottom: 14px; }
+    .school { font-size: 0.92rem; color: var(--muted); margin: 0 0 4px; }
+    .gpa { font-size: 0.92rem; color: var(--muted); margin: 0 0 22px; }
+    .bio { font-size: 1.05rem; max-width: 560px; margin: 0 0 28px; }
+    .actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    /* Galleries */
+    .gallery { position: relative; }
+    .gal-item { display: none; }
+    .gal-item.active { display: block; }
+    .gal-item img { width: 100%; aspect-ratio: 4 / 3; object-fit: contain; background: #fbfaf7; display: block; border-radius: var(--radius); border: 1px solid var(--border); }
+    .gal-cap { font-size: 0.86rem; color: var(--muted); margin: 8px 0 0; text-align: center; }
+    .gal-controls { display: flex; align-items: center; justify-content: center; gap: 14px; margin-top: 10px; }
+    .gal-controls[hidden] { display: none; }
+    .gal-btn { width: 34px; height: 34px; border-radius: 50%; border: 1px solid var(--border); background: #fff; color: var(--accent-dark); font-size: 1rem; cursor: pointer; }
+    .gal-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .gal-count { font-size: 0.82rem; color: var(--muted); font-variant-numeric: tabular-nums; min-width: 48px; text-align: center; }
+
+    /* Featured carousel */
+    .carousel { position: relative; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 28px; box-shadow: 0 10px 30px rgba(38,38,36,0.06); }
+    .slide { display: none; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); gap: 36px; align-items: center; }
+    .slide.active { display: grid; }
+    .slide-text h3 { font-size: clamp(1.8rem, 3vw, 2.3rem); margin-bottom: 8px; }
+    .slide-text p { margin: 0 0 18px; }
+    .slide-controls { display: flex; align-items: center; justify-content: space-between; gap: 16px; margin-top: 24px; flex-wrap: wrap; }
+    .dots { display: flex; gap: 8px; }
+    .dot { width: 9px; height: 9px; border-radius: 50%; border: none; padding: 0; background: var(--border); cursor: pointer; }
+    .dot.active { background: var(--accent); }
+    .counter { font-size: 0.9rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+    .arrows { position: absolute; top: 50%; left: -64px; right: -64px; transform: translateY(-50%); display: flex; justify-content: space-between; pointer-events: none; }
+    .arrow { pointer-events: auto; width: 42px; height: 42px; border-radius: 50%; border: 1px solid var(--border); background: #fff; color: var(--accent-dark); font-size: 1.1rem; cursor: pointer; }
+    .arrow:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .card-link { color: var(--accent-dark); font-weight: 600; text-decoration: none; font-size: 0.92rem; }
+    .card-link:hover { text-decoration: underline; }
+
+    /* Cards */
+    .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 24px; }
+    .card { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; display: flex; flex-direction: column; color: var(--text); }
+    .card-media { padding: 14px 14px 0; background: #fbfaf7; border-bottom: 1px solid var(--border); }
+    .card-media .gal-item img { border: none; border-radius: 8px; }
+    .card-body { padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .card-body h3 { font-size: 1.45rem; }
+    .card-body p { margin: 0; font-size: 0.94rem; }
+    .meta { color: var(--muted); font-size: 0.86rem; margin: 0; }
+    .note { color: var(--muted); font-size: 0.84rem; font-style: italic; margin: 0; }
+    a.card-link-block { color: var(--accent-dark); font-weight: 600; font-size: 0.92rem; text-decoration: none; margin-top: auto; padding-top: 6px; }
+    a.card-link-block:hover { text-decoration: underline; }
+    .tags { display: flex; flex-wrap: wrap; gap: 8px; margin: 12px 0 0; padding: 0; list-style: none; }
+    .tags li { background: var(--accent-soft); color: var(--accent-dark); border-radius: 999px; padding: 4px 12px; font-size: 0.8rem; font-weight: 500; }
+    .subhead { margin: 56px 0 20px; }
+    .subhead h2 { font-size: clamp(1.8rem, 3.5vw, 2.3rem); }
+
+    /* Skills, stacked rows */
+    .skill-row { display: grid; grid-template-columns: 170px minmax(0, 1fr); gap: 16px; align-items: center; padding: 16px 0; border-top: 1px solid var(--border); }
+    .skill-row:last-child { border-bottom: 1px solid var(--border); }
+    .skill-row h3 { font-size: 1.4rem; color: var(--accent-dark); }
+    .skill-row .tags { margin: 0; }
+
+    /* Experience */
+    .exp { display: grid; gap: 22px; max-width: 760px; }
+    .exp-item { border-top: 1px solid var(--border); padding-top: 18px; }
+    .exp-item h3 { font-size: 1.4rem; margin-bottom: 4px; }
+    .exp-item p { margin: 0; }
+    .exp-item ul { margin: 12px 0 0; padding-left: 20px; }
+    .exp-item li { margin-bottom: 6px; }
+
+    /* Contact */
+    .contact-panel { display: flex; gap: 40px; align-items: center; justify-content: space-between; flex-wrap: wrap; background: var(--surface); border: 1px solid var(--border); border-radius: 18px; padding: 40px; box-shadow: 0 10px 30px rgba(38,38,36,0.06); max-width: 860px; }
+    .contact-main { flex: 1 1 380px; }
+    .contact-text { font-size: 1.05rem; margin: 0 0 26px; max-width: 480px; }
+    .contact-details { list-style: none; margin: 0; padding: 0; display: grid; gap: 12px; }
+    .contact-details li { display: flex; gap: 14px; align-items: baseline; flex-wrap: wrap; }
+    .contact-details span { font-size: 0.78rem; letter-spacing: 0.14em; text-transform: uppercase; color: var(--accent); font-weight: 600; min-width: 72px; }
+    .contact-details a { color: var(--text); text-decoration: none; border-bottom: 1px solid var(--border); }
+    .contact-details a:hover { color: var(--accent-dark); border-bottom-color: var(--accent); }
+    .contact-symbol { width: 140px; height: 140px; border-radius: 50%; border: 1px solid var(--border); background: var(--bg); color: var(--accent-dark); display: flex; align-items: center; justify-content: center; flex: 0 0 auto; }
+    .contact-symbol svg { width: 64px; height: 64px; }
+    .contact-box p { font-size: 1.05rem; }
+    .contact-links { display: flex; gap: 12px; flex-wrap: wrap; margin-top: 24px; }
+
+    /* Project detail */
+    .project { max-width: 780px; margin: 0 auto; padding: 48px 0 24px; }
+    .project h1 { font-size: clamp(2.4rem, 5vw, 3.4rem); margin-bottom: 10px; }
+    .project p { font-size: 1.04rem; }
+    .project .gallery { margin: 28px 0; }
+    .back { display: inline-block; margin-bottom: 18px; color: var(--muted); font-size: 0.92rem; text-decoration: none; }
+    .back:hover { color: var(--accent-dark); }
+    .report-link { display: inline-block; margin-top: 12px; font-weight: 600; }
+
+    /* Footer */
+    .site-footer { border-top: 1px solid var(--border); margin-top: 72px; padding: 32px 0; color: var(--muted); font-size: 0.92rem; }
+    .site-footer .container { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; }
+
+    .gal-item img { cursor: zoom-in; }
+    .card { position: relative; }
+    .expand-btn { position: absolute; top: 12px; right: 12px; z-index: 5; width: 36px; height: 36px; border-radius: 50%; border: 1px solid var(--border); background: rgba(255,255,255,0.95); color: var(--accent-dark); display: flex; align-items: center; justify-content: center; cursor: pointer; }
+    .expand-btn:hover { border-color: var(--accent); background: var(--accent-soft); }
+    .expand-btn svg { width: 16px; height: 16px; }
+    .carousel-expand { top: 10px; right: 10px; }
+    .more-text { display: none; flex-direction: column; gap: 8px; }
+    .expand-panel .more-text { display: flex; }
+    .view-more { align-self: flex-start; background: none; border: none; padding: 4px 0 0; color: var(--accent-dark); font-weight: 600; font-size: 0.92rem; cursor: pointer; font-family: var(--font-body); }
+    .view-more:hover { text-decoration: underline; }
+    .expand-panel .slide { display: grid; background: var(--surface); padding: 28px; border-radius: 18px; }
+    .expand-modal { position: fixed; inset: 0; background: rgba(20,20,18,0.7); display: flex; align-items: center; justify-content: center; padding: 24px; z-index: 150; overflow-y: auto; }
+    .expand-modal[hidden] { display: none; }
+    .expand-panel { position: relative; width: 100%; max-width: 960px; max-height: 92vh; overflow-y: auto; border-radius: 18px; }
+    .expand-panel .card { border: none; box-shadow: 0 20px 60px rgba(0,0,0,0.3); }
+    .expand-panel .expand-btn { display: none; }
+    .expand-close { position: sticky; top: 12px; float: right; margin: 12px 12px 0 0; z-index: 6; width: 38px; height: 38px; border-radius: 50%; border: 1px solid var(--border); background: #fff; color: var(--accent-dark); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+    .lightbox { position: fixed; inset: 0; background: rgba(20,20,18,0.88); display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; z-index: 200; cursor: zoom-out; }
+    .lightbox[hidden] { display: none; }
+    .lightbox img { max-width: min(1100px, 94vw); max-height: 82vh; width: auto; height: auto; object-fit: contain; border-radius: 8px; background: #fff; }
+    .lightbox p { color: #f6f4ef; margin: 14px 0 0; font-size: 0.95rem; text-align: center; max-width: 700px; }
+
+    @media (max-width: 860px) {
+      .hero { grid-template-columns: 1fr; gap: 32px; padding-top: 40px; }
+      .hero-photo { max-width: 360px; }
+      .slide { grid-template-columns: 1fr; gap: 22px; }
+      .arrows { left: 0; right: 0; }
+    }
+    @media (max-width: 560px) {
+      .site-nav { gap: 16px; }
+      .carousel { padding: 18px; }
+      .skill-row { grid-template-columns: 1fr; gap: 8px; }
+    }
+  </style>
+</head>
+<body>
+
+  <header class="site-header">
+    <div class="container">
+      <a class="logo" href="#home">Crystal Cooper</a>
+      <nav class="site-nav">
+        <a href="#home" data-page="home">Home</a>
+        <a href="#projects" data-page="projects">Projects</a>
+        <a href="#experience" data-page="experience">Experience</a>
+        <a href="#contact" data-page="contact">Contact</a>
+      </nav>
+      <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+    </div>
+  </header>
+
+  <main class="container">
+
+    <!-- HOME -->
+    <section class="page" id="home">
+
+      <div class="hero">
+        <img class="hero-photo" src="images/headshot.png" alt="Crystal Cooper">
+        <div>
+          <p class="eyebrow">Mechanical Engineer &amp; Designer</p>
+          <h1>Crystal Cooper</h1>
+          <p class="school">Northwestern University | B.S. Mechanical Engineering, Design Concentration | Entrepreneurship Minor</p>
+          <p class="bio">I am passionate about designing mechanical systems and products that combine technical rigor with user-centered thinking. I am deeply interested in industrial design, attractions engineering, and experiences design, and I enjoy solving real-world problems through iteration.</p>
+          <div class="actions">
+            <a class="btn btn-solid" href="#projects">View Projects</a>
+            <a class="btn" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Selected Work</p>
+            <h2>4 Featured Projects</h2>
+          </div>
+          <p>Flip through or click "View more" for the full story.</p>
+        </div>
+
+        <div class="carousel" id="carousel">
+
+          <div class="slide active">
+            <div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/gearbox-CAD.png" alt="CAD model of the two-stage gearbox"><p class="gal-cap">CAD model of the two-stage gearbox</p></div>
+              <div class="gal-item"><img src="images/gearbox-diagram.png" alt="Gearbox diagram"><p class="gal-cap">Gearbox diagram</p></div>
+              <div class="gal-item"><img src="images/gearbox-assembly.png" alt="Shaft B assembly"><p class="gal-cap">Shaft B assembly</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div>
+            <div class="slide-text">
+              <p class="eyebrow">ME 315 Machine Design | Spring 2026</p>
+              <h3>Two-Stage Gearbox</h3>
+              <p>Designed a 70 kW two-stage spur gearbox with infinite fatigue life across all shafts and gears.</p>
+              <ul class="tags"><li>Shaft Design</li><li>AGMA Gear Analysis</li><li>Bearing Selection</li></ul>
+              <p style="margin-top:20px"><a class="card-link" href="#gearbox">View more →</a></p>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/calipers-final.jpeg" alt="Final 3D-printed bike brake caliper on a bicycle"><p class="gal-cap">Final prototype on a bicycle</p></div>
+              <div class="gal-item"><img src="images/calipers-TO.png" alt="Topology optimization results"><p class="gal-cap">Topology optimization results</p></div>
+              <div class="gal-item"><img src="images/calipers-FEA.png" alt="FEA stress analysis"><p class="gal-cap">FEA stress analysis</p></div>
+              <div class="gal-item"><img src="images/calipers-1stdraft.jpeg" alt="First prototype"><p class="gal-cap">First prototype</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div>
+            <div class="slide-text">
+              <p class="eyebrow">ME 240 Mechanical Design | Spring 2025</p>
+              <h3>3D-Printed Brake Calipers</h3>
+              <p>Bike calipers meeting ISO 4210, EN 14781, and CPSC requirements. Topology optimization cut peak stress 86%.</p>
+              <ul class="tags"><li>FEA</li><li>Topology Optimization</li><li>3D Printing</li></ul>
+              <p style="margin-top:20px"><a class="card-link" href="#calipers">View more →</a></p>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/smartreach-final.png" alt="Final SmartReach device"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/smartreach-final-in-use.png" alt="SmartReach in use"><p class="gal-cap">In use</p></div>
+              <div class="gal-item"><img src="images/smartreach-user-testing.png" alt="Mockup testing with user"><p class="gal-cap">Mockup testing with user</p></div>
+              <div class="gal-item"><img src="images/smartreach-user-observation.png" alt="User observation session"><p class="gal-cap">User observation session</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div>
+            <div class="slide-text">
+              <p class="eyebrow">DTC 2 Design Thinking | Spring 2024</p>
+              <h3>SmartReach</h3>
+              <p>An extendable pointer that lets wheelchair users press ADA push-to-open buttons independently.</p>
+              <ul class="tags"><li>User Research</li><li>Accessibility Design</li><li>Prototyping</li></ul>
+              <p style="margin-top:20px"><a class="card-link" href="#smartreach">View more →</a></p>
+            </div>
+          </div>
+
+          <div class="slide">
+            <div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/flatpack-final.jpeg" alt="Laser-cut flat-pack utensil organizer"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/flatpack-CAD.png" alt="CAD model"><p class="gal-cap">CAD model</p></div>
+              <div class="gal-item"><img src="images/flatpack-mockup.jpeg" alt="Cardboard mockup"><p class="gal-cap">Cardboard mockup</p></div>
+              <div class="gal-item"><img src="images/flatpack-laser.jpeg" alt="Laser-cut plywood parts"><p class="gal-cap">Laser-cut plywood parts</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div>
+            <div class="slide-text">
+              <p class="eyebrow">DSGN 380-1 Industrial Design | Spring 2026</p>
+              <h3>Flat-Pack Utensil Organizer</h3>
+              <p>A flat-pack vertical utensil organizer refined from cardboard mockups to laser-cut plywood.</p>
+              <ul class="tags"><li>Industrial Design</li><li>CAD Design</li><li>Laser Cutting</li><li>Design for Manufacturing</li></ul>
+              <p style="margin-top:20px"><a class="card-link" href="#flatpack">View more →</a></p>
+            </div>
+          </div>
+
+          <div class="arrows">
+            <button class="arrow" id="prev" aria-label="Previous project">←</button>
+            <button class="arrow" id="next" aria-label="Next project">→</button>
+          </div>
+
+          <div class="slide-controls">
+            <div class="dots" id="dots"></div>
+            <span class="counter" id="counter"></span>
+          </div>
+
+        </div>
+      </div>
+
+      <div class="section">
+        <div class="section-head">
+          <div>
+            <p class="eyebrow">Toolkit</p>
+            <h2>Technical Skills</h2>
+          </div>
+        </div>
+        <div class="skill-row">
+          <h3>Design</h3>
+          <ul class="tags"><li>Figma</li><li>Vizcom</li><li>Canva</li></ul>
+        </div>
+        <div class="skill-row">
+          <h3>CAD</h3>
+          <ul class="tags"><li>NX CAD</li><li>Onshape</li></ul>
+        </div>
+        <div class="skill-row">
+          <h3>Programming</h3>
+          <ul class="tags"><li>Python</li><li>MATLAB</li><li>Excel</li></ul>
+        </div>
+        <div class="skill-row">
+          <h3>Analysis</h3>
+          <ul class="tags"><li>Finite element analysis (FEA)</li><li>Topology optimization</li><li>Fatigue analysis</li><li>Tolerance stack-up</li></ul>
+        </div>
+        <div class="skill-row">
+          <h3>Shop</h3>
+          <ul class="tags"><li>3D printing</li><li>Laser cutter</li><li>Vertical band saw</li><li>Drill press</li><li>Bench shear</li><li>Box and pan brake</li><li>Bridgeport mill</li></ul>
+        </div>
+      </div>
+
+    </section>
+
+    <!-- PROJECTS -->
+    <section class="page" id="projects">
+
+      <div class="page-top">
+        <p class="eyebrow">Portfolio</p>
+        <h1>Projects</h1>
+      </div>
+
+      <div class="section" style="padding-top:32px">
+        <div class="grid">
+
+          <article class="card">
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/gearbox-CAD.png" alt="CAD model of the two-stage gearbox"><p class="gal-cap">CAD model of the two-stage gearbox</p></div>
+              <div class="gal-item"><img src="images/gearbox-diagram.png" alt="Gearbox diagram"><p class="gal-cap">Gearbox diagram</p></div>
+              <div class="gal-item"><img src="images/gearbox-assembly.png" alt="Shaft B assembly"><p class="gal-cap">Shaft B assembly</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Two-Stage Gearbox</h3>
+              <p class="meta">ME 315 Machine Design | Spring 2026</p>
+              <p>Designed a 70 kW two-stage spur gearbox with infinite fatigue life across all shafts and gears.</p>
+              <a class="card-link-block" href="#gearbox">View project →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/calipers-final.jpeg" alt="Final 3D-printed bike brake caliper on a bicycle"><p class="gal-cap">Final prototype on a bicycle</p></div>
+              <div class="gal-item"><img src="images/calipers-TO.png" alt="Topology optimization results"><p class="gal-cap">Topology optimization results</p></div>
+              <div class="gal-item"><img src="images/calipers-FEA.png" alt="FEA stress analysis"><p class="gal-cap">FEA stress analysis</p></div>
+              <div class="gal-item"><img src="images/calipers-1stdraft.jpeg" alt="First prototype"><p class="gal-cap">First prototype</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>3D-Printed Brake Calipers</h3>
+              <p class="meta">ME 240 Mechanical Design | Spring 2025</p>
+              <p>Bike calipers meeting ISO 4210, EN 14781, and CPSC requirements. Topology optimization cut peak stress 86%.</p>
+              <a class="card-link-block" href="#calipers">View project →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/smartreach-final.png" alt="Final SmartReach device"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/smartreach-final-in-use.png" alt="SmartReach in use"><p class="gal-cap">In use</p></div>
+              <div class="gal-item"><img src="images/smartreach-user-testing.png" alt="Mockup testing with user"><p class="gal-cap">Mockup testing with user</p></div>
+              <div class="gal-item"><img src="images/smartreach-user-observation.png" alt="User observation session"><p class="gal-cap">User observation session</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>SmartReach</h3>
+              <p class="meta">DTC 2 Design Thinking | Spring 2024</p>
+              <p>An extendable pointer that lets wheelchair users press ADA push-to-open buttons independently.</p>
+              <a class="card-link-block" href="#smartreach">View project →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/flatpack-final.jpeg" alt="Laser-cut flat-pack utensil organizer"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/flatpack-CAD.png" alt="CAD model"><p class="gal-cap">CAD model</p></div>
+              <div class="gal-item"><img src="images/flatpack-mockup.jpeg" alt="Cardboard mockup"><p class="gal-cap">Cardboard mockup</p></div>
+              <div class="gal-item"><img src="images/flatpack-laser.jpeg" alt="Laser-cut plywood parts"><p class="gal-cap">Laser-cut plywood parts</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Flat-Pack Utensil Organizer</h3>
+              <p class="meta">DSGN 380-1 Industrial Design | Spring 2026</p>
+              <p>A flat-pack vertical utensil organizer refined from cardboard mockups to laser-cut plywood.</p>
+              <a class="card-link-block" href="#flatpack">View project →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/printato-poster.png" alt="Printato team poster"><p class="gal-cap">Team poster</p></div>
+              <div class="gal-item"><img src="images/printato-final.png" alt="Final Printato prototype"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/printato-in-use.png" alt="Printato in use"><p class="gal-cap">In use</p></div>
+              <div class="gal-item"><img src="images/printato-attachments.png" alt="Interchangeable attachments"><p class="gal-cap">Interchangeable attachments</p></div>
+              <div class="gal-item"><img src="images/printato-lever-dimensions.png" alt="Lever dimensions"><p class="gal-cap">Lever dimensions</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>The Printato: Hand Printing Press</h3>
+              <p class="meta">Design, Thinking, and Communication | Winter 2024</p>
+              <p>A hand printing press built from household objects, designed so children and adults can make prints where variation becomes part of the art.</p>
+              <ul class="tags"><li>Prototyping</li><li>User Testing</li><li>Design Thinking</li><li>Household Objects</li></ul>
+              <a class="card-link-block" href="#printato">View project →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <button class="expand-btn" type="button" aria-label="Expand project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/314-simulation.jpg" alt="Jack-in-a-box simulation output"><p class="gal-cap">Simulation output</p></div>
+              <div class="gal-item"><img src="images/314-diagram.jpg" alt="Coordinate frame diagram"><p class="gal-cap">Coordinate frame diagram</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Jack-in-a-Box Simulation</h3>
+              <p class="meta">ME 314: Theory of Machines, Dynamics | Spring 2025</p>
+              <p>Designed and built a Python simulation of a jack-in-a-box using Lagrangian mechanics. Derived the kinematics of the box and jack with homogeneous transformations, applied the Euler-Lagrange equations, and modeled impacts with constraint-based impulse laws. The simulation runs fully, showing the jack bouncing off the walls while the box is shaken by a sinusoidal torque.</p>
+              <ul class="tags"><li>Python</li><li>Lagrangian Mechanics</li><li>Kinematics</li><li>Impact Modeling</li></ul>
+              <a class="card-link-block" href="reports/jack-in-a-box-writeup.pdf" target="_blank" rel="noopener">Read the full report (PDF) →</a>
+            </div>
+          </article>
+
+          <article class="card">
+            <button class="expand-btn" type="button" aria-label="Expand project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/emv-vizcom-render.png" alt="Vizcom render of the initial EMV concept"><p class="gal-cap">Vizcom render of the initial concept developed during team brainstorming. Final prototype photo unavailable.</p></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Ride Design: EMV Prototype</h3>
+              <p class="meta">Theme Park Engineering and Design Group | Spring 2025</p>
+              <p>Led track section design and fabrication for a villain-themed EMV prototype. Designed a roughly 10-foot track with inclines, declines, and consistent curve angles, engineering the transitions to balance structural safety with immersive ride dynamics. Built the wooden pieces to fit together with screws for quick assembly.</p>
+              <ul class="tags"><li>Track Design</li><li>Fabrication</li><li>Ride Dynamics</li></ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <button class="expand-btn" type="button" aria-label="Expand project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/haunted-house.jpeg" alt="Haunted house event poster"><p class="gal-cap">Event poster, Halloween 2024</p></div>
+              <div class="gal-item"><img src="images/haunted-house-actor.jpeg" alt="Scare actor on site"><p class="gal-cap">Scare actor on site</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Haunted House: 1031 Paranormal Place</h3>
+              <p class="meta">Theme Park Engineering and Design Group | 2024</p>
+              <p>Served as creative director for a haunted house in the Louis Room at Norris, open to students on Halloween. Led ideation and decision-making from concept through build, managed a budget of about $2,000, sourced hair and makeup designers for the scare actors, and ran auditions. Attendees described the scare actors as believable, with sound and lighting creating a spooky atmosphere.</p>
+              <ul class="tags"><li>Creative Direction</li><li>Budgeting</li><li>Casting</li><li>Team Leadership</li></ul>
+            </div>
+          </article>
+
+          <article class="card">
+            <button class="expand-btn" type="button" aria-label="Expand project"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 9V4h5M20 9V4h-5M4 15v5h5M20 15v5h-5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <div class="card-media"><div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/escape-room.jpeg" alt="Island Adventure escape room event poster"><p class="gal-cap">Event poster, 2024</p></div>
+            </div></div>
+            <div class="card-body">
+              <h3>Island Adventure Escape Room</h3>
+              <p class="meta">Theme Park Engineering and Design Group | 2024</p>
+              <p>Served as creative director for an escape room in Annenberg Hall with roughly 15 puzzles and groups of about 80 guests. Designed puzzle links such as numbers on beach umbrella colors setting the order of colored tiles, which opened the next clue. Led ideation and decision-making from concept through build.</p>
+              <ul class="tags"><li>Creative Direction</li><li>Puzzle Design</li><li>Team Leadership</li></ul>
+            </div>
+          </article>
+
+        </div>
+
+        <div class="subhead">
+          <p class="eyebrow">Currently Working On</p>
+          <h2>Projects in Progress</h2>
+        </div>
+        <div class="grid">
+          <article class="card">
+            <div class="card-body">
+              <h3>Improved Cutting Board</h3>
+              <p class="meta">DSGN 306: User Experience Design | Fall 2026</p>
+              <p>Currently designing an improved cutting board. More details coming soon.</p>
+              <ul class="tags"><li>User Experience Design</li><li>Industrial Design</li></ul>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- EXPERIENCE -->
+    <section class="page" id="experience">
+      <div class="page-top">
+        <p class="eyebrow">Background</p>
+        <h1>Experience</h1>
+      </div>
+      <div class="section" style="padding-top:32px">
+        <div class="exp">
+          <div class="exp-item">
+            <h3>Sustainability Intern, Crown Holdings</h3>
+            <p class="meta">Tinley Park, IL | June 2026 – August 2026</p>
+            <p>Sustainability intern on the Global Sustainability team at Crown Holdings, a global metal packaging manufacturer with roughly 180 plants. My work centered on four core deliverables: WASH compliance, a CAPEX database, VOC standardization, and GRI reporting.</p>
+            <ul>
+              <li>Built a GRI data macro system with an automated changelog and undo, plus color-coded change tracking and a filterable WASH survey tracker, all in Excel VBA.</li>
+              <li>Built a financial model for internal water and carbon pricing across 200+ CAPEX projects, and a CO2e savings valuation analysis.</li>
+              <li>Prepared GRI 303-4 wastewater reporting by discharge destination and CDP Module 7 updates for EMEA and North America.</li>
+              <li>Analyzed groundwater data to separate site-level and company-level contributions, and researched VOC compliance across the plant network.</li>
+              <li>Automated recurring workflows with Power Automate and Excel lookups.</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <h3>Creative Director, Theme Park Engineering and Design Group</h3>
+            <p class="meta">Evanston, IL | March 2024 – Present</p>
+            <p>Creative Director for a student group that designs and builds ride and attraction concepts. I lead creative ideation and decision-making across its projects.</p>
+            <ul>
+              <li>Haunted House: led ideation and decision-making from concept through build, managed a budget of about $2,000, and sourced hair and makeup designers for the scare actors.</li>
+              <li>Escape Room: directed a room in Annenberg Hall with roughly 15 puzzles for groups of about 80 guests, including puzzles that set the order of tiles to unlock the next clue.</li>
+              <li>EMV prototype: led track section design and fabrication for a villain-themed ride, engineering curvature transitions to balance structural safety with ride dynamics.</li>
+            </ul>
+          </div>
+          <div class="exp-item">
+            <h3>Online Media Director, Kappa Alpha Theta</h3>
+            <p class="meta">Evanston, IL | January 2024 – Present</p>
+            <p>Online Media Director for a 120+ member chapter. I built the visual brand strategy and content system for its social media and community storytelling.</p>
+            <ul>
+              <li>Established a warm visual aesthetic and community-centered narrative across platforms.</li>
+              <li>Developed a content calendar and a casting strategy that prioritized inclusive representation to encourage member participation.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="page" id="contact">
+      <div class="page-top">
+        <p class="eyebrow">Get in Touch</p>
+        <h1>Contact</h1>
+      </div>
+      <div class="section" style="padding-top:32px">
+        <div class="contact-panel">
+          <div class="contact-main">
+            <p class="contact-text">I’m looking for full-time mechanical design roles, especially in attractions engineering, experience design, product design, and industrial design. If you have an opening or a question about my work, I would love to hear from you.</p>
+            <ul class="contact-details">
+              <li><span>Email</span><a href="mailto:crystalcooper2027@u.northwestern.edu">crystalcooper2027@u.northwestern.edu</a></li>
+              <li><span>Phone</span><a href="tel:+18138534842">813.853.4842</a></li>
+              <li><span>LinkedIn</span><a href="https://linkedin.com/in/crystalcooperr" target="_blank" rel="noopener">linkedin.com/in/crystalcooperr</a></li>
+            </ul>
+          </div>
+          <div class="contact-symbol" role="img" aria-label="Contact"><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M3.5 6.5 12 13l8.5-6.5" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg></div>
+        </div>
+        <div class="contact-links">
+          <a class="btn btn-solid" href="resume.pdf" target="_blank" rel="noopener">Download Resume</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GEARBOX -->
+    <section class="page" id="gearbox">
+      <article class="project">
+        <a class="back" href="#home">← Back to home</a>
+        <p class="eyebrow">ME 315 Machine Design | Spring 2026</p>
+        <h1>Two-Stage Gearbox</h1>
+        <div class="gallery" data-gallery>
+          <div class="gal-item active"><img src="images/gearbox-CAD.png" alt="CAD model of the two-stage gearbox"><p class="gal-cap">CAD model of the two-stage gearbox</p></div>
+          <div class="gal-item"><img src="images/gearbox-diagram.png" alt="Gearbox diagram"><p class="gal-cap">Gearbox diagram</p></div>
+          <div class="gal-item"><img src="images/gearbox-assembly.png" alt="Shaft B assembly"><p class="gal-cap">Shaft B assembly</p></div>
+          <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+        </div>
+        <p>My team designed and analyzed a two-stage gear reduction system for an industrial production line, transmitting 70 kW from motor to output while keeping the input and output shafts close together, ensuring a 5+ year service life, and optimizing for cost and manufacturability.</p>
+        <p>I led the design of Shaft B, the most complex component because it carries two gears at once, creating dual load paths and requiring careful coordination of alignment and stress. I chose spur gears over helical alternatives, accepting slightly higher noise in exchange for lower cost and simpler manufacturing.</p>
+        <p>For bearings, our initial selection could not meet the 5+ year service life, so I switched Shaft B to SKF 6313 deep-groove bearings and planned one replacement during the product's life.</p>
+        <p>Through stress analysis and fatigue calculations, the final design achieves infinite fatigue life across all shafts and gears, with a minimum gear bending safety factor of 1.36 and a Shaft B Goodman safety factor of 2.68.</p>
+        <ul class="tags"><li>Shaft Design</li><li>AGMA Gear Analysis</li><li>Bearing Selection</li><li>Fatigue Analysis</li></ul>
+        <a class="btn report-link" href="reports/gearbox-final-report.pdf" target="_blank" rel="noopener">Read the full report (PDF)</a>
+      </article>
+    </section>
+
+    <!-- CALIPERS -->
+    <section class="page" id="calipers">
+      <article class="project">
+        <a class="back" href="#home">← Back to home</a>
+        <p class="eyebrow">ME 240 Mechanical Design | Spring 2025</p>
+        <h1>3D-Printed Brake Calipers</h1>
+        <div class="gallery" data-gallery>
+          <div class="gal-item active"><img src="images/calipers-final.jpeg" alt="Final 3D-printed bike brake caliper on a bicycle"><p class="gal-cap">Final prototype on a bicycle</p></div>
+          <div class="gal-item"><img src="images/calipers-TO.png" alt="Topology optimization results"><p class="gal-cap">Topology optimization results</p></div>
+          <div class="gal-item"><img src="images/calipers-FEA.png" alt="FEA stress analysis"><p class="gal-cap">FEA stress analysis</p></div>
+          <div class="gal-item"><img src="images/calipers-1stdraft.jpeg" alt="First prototype"><p class="gal-cap">First prototype</p></div>
+          <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+        </div>
+        <p>My group designed 3D-printed bicycle brake calipers that meet ISO 4210, EN 14781, and CPSC requirements while optimizing for manufacturability and performance. The design had to balance braking distance, deflection, stress, mass, and fit within the space around the frame, all in Nylon-12, a relatively brittle material.</p>
+        <p>I translated the safety standards into design parameters, then ran two rounds of topology optimization and iterative FEA to minimize mass under a 2.75 mm deflection constraint. The optimization pushed material toward the vertical load paths and rounded transitions.</p>
+        <p>Peak stress dropped from 150 MPa to 21 MPa (an 86% reduction), and deflection dropped 7.5% in the redesign. The final calipers reached a 12.2 m stopping distance, down from 15.0 m, and met all marginal performance targets, though not the 10 m ideal.</p>
+        <ul class="tags"><li>FEA</li><li>Topology Optimization</li><li>3D Printing</li><li>Design Iteration</li><li>Testing and Validation</li></ul>
+        <a class="btn report-link" href="reports/calipers-final-report.pdf" target="_blank" rel="noopener">Read the full report (PDF)</a>
+      </article>
+    </section>
+
+    <!-- SMARTREACH -->
+    <section class="page" id="smartreach">
+      <article class="project">
+        <a class="back" href="#home">← Back to home</a>
+        <p class="eyebrow">DTC 2 Design Thinking | Spring 2024</p>
+        <h1>SmartReach</h1>
+        <div class="gallery" data-gallery>
+          <div class="gal-item active"><img src="images/smartreach-final.png" alt="Final SmartReach device"><p class="gal-cap">Final prototype</p></div>
+          <div class="gal-item"><img src="images/smartreach-final-in-use.png" alt="SmartReach in use"><p class="gal-cap">In use</p></div>
+          <div class="gal-item"><img src="images/smartreach-user-testing.png" alt="Mockup testing with user"><p class="gal-cap">Mockup testing with user</p></div>
+          <div class="gal-item"><img src="images/smartreach-user-observation.png" alt="User observation session"><p class="gal-cap">User observation session</p></div>
+          <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+        </div>
+        <p>My team designed an extendable pointer that helps wheelchair users with limited upper-body mobility press ADA push-to-open buttons at public establishments. We worked directly with Sophia, a 20-year-old with cerebral palsy, to address a core barrier: ADA buttons on her right side force wheelchair repositioning, and doors often close before she can pass through. Existing telescopic pointers failed because they demanded precision and grip strength she lacked.</p>
+        <p>I led user research and iterative design over a 9-week testing cycle, conducting on-site observations at dining establishments and testing six mockups directly with Sophia. Early iterations explored wrist attachments and bracelet designs, but testing showed they caused discomfort and restricted her natural reach. We pivoted to an accordion-fold mechanism deployed by a trigger, which she found easier than pressing a button, and kept the accordion-fold with magnetic attachment after comparing it against expandable tips and lap-mounted designs.</p>
+        <p>Testing revealed a counter-intuitive insight that reshaped the design: a wide, flat pointer tip, though less elegant, was far more effective than a precision-pointed tip because it reduced the cognitive and motor precision required. This taught me that accessibility design means setting aside assumptions about "optimal" solutions in favor of what users actually need.</p>
+        <p>The final design lets Sophia press buttons on her own, without repositioning her wheelchair or relying on a caregiver. Elastic armrest sleeves and a bungee cord support independent use and protect the device from drops.</p>
+        <ul class="tags"><li>User Research</li><li>Accessibility Design</li><li>Prototyping</li><li>Design Iteration</li></ul>
+        <a class="btn report-link" href="reports/smartreach-final-report.pdf" target="_blank" rel="noopener">Read the full report (PDF)</a>
+      </article>
+    </section>
+
+    <!-- FLAT-PACK -->
+    <section class="page" id="flatpack">
+      <article class="project">
+        <a class="back" href="#home">← Back to home</a>
+        <p class="eyebrow">DSGN 380-1 Industrial Design | Spring 2026</p>
+        <h1>Flat-Pack Vertical Utensil Organizer</h1>
+        <div class="gallery" data-gallery>
+          <div class="gal-item active"><img src="images/flatpack-final.jpeg" alt="Laser-cut flat-pack utensil organizer"><p class="gal-cap">Final prototype</p></div>
+          <div class="gal-item"><img src="images/flatpack-CAD.png" alt="CAD model"><p class="gal-cap">CAD model</p></div>
+          <div class="gal-item"><img src="images/flatpack-mockup.jpeg" alt="Cardboard mockup"><p class="gal-cap">Cardboard mockup</p></div>
+          <div class="gal-item"><img src="images/flatpack-laser.jpeg" alt="Laser-cut plywood parts"><p class="gal-cap">Laser-cut plywood parts</p></div>
+          <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+        </div>
+        <p>I designed a flat-pack vertical utensil organizer to solve a problem in my own kitchen: limited drawer space and plenty of counter space. Inspired by vertical spoon stands, I wanted a modular storage system that frees up drawer space for food while keeping everyday utensils within reach.</p>
+        <p>I explored several sketch concepts before settling on a tiered organizer with a central vertical spine, side compartments for larger utensils and spatulas, and a top shelf. I prototyped in stages: first a cardboard and wood hybrid to test the basic form, then a paper-based composite from the shop. That material was too flimsy, so I moved to plywood for precision and durability while keeping the profile narrow.</p>
+        <p>Laser cutting brought tolerance problems. My first prototype cut too tight and the pieces would not fit together, and the second was too loose. Instead of re-sketching, I built tolerance parameters into my Onshape CAD model and adjusted them systematically across three laser-cutter trials. Embedding tolerance in the model meant each refinement took minutes in CAD instead of hours of rework.</p>
+        <p>I chose 1/8-inch plywood because the laser cutter is more precise with thinner material, waste is lower, and the finished piece stays compact, which fits the goal of saving counter space. The final prototype holds utensils securely while keeping the vertical storage that inspired the project. The main lesson was that constraints drive better design: limited drawer space was the insight behind the solution.</p>
+        <ul class="tags"><li>Industrial Design</li><li>CAD Design</li><li>Laser Cutting</li><li>Prototyping</li><li>Design for Manufacturing</li></ul>
+      </article>
+    </section>
+
+    <!-- PRINTATO -->
+    <section class="page" id="printato">
+      <article class="project">
+        <a class="back" href="#projects">← Back to projects</a>
+        <p class="eyebrow">Design, Thinking, and Communication | Winter 2024</p>
+        <h1>The Printato: Hand Printing Press</h1>
+        <div class="gallery" data-gallery>
+              <div class="gal-item active"><img src="images/printato-poster.png" alt="Printato team poster"><p class="gal-cap">Team poster</p></div>
+              <div class="gal-item"><img src="images/printato-final.png" alt="Final Printato prototype"><p class="gal-cap">Final prototype</p></div>
+              <div class="gal-item"><img src="images/printato-in-use.png" alt="Printato in use"><p class="gal-cap">In use</p></div>
+              <div class="gal-item"><img src="images/printato-attachments.png" alt="Interchangeable attachments"><p class="gal-cap">Interchangeable attachments</p></div>
+              <div class="gal-item"><img src="images/printato-lever-dimensions.png" alt="Lever dimensions"><p class="gal-cap">Lever dimensions</p></div>
+              <div class="gal-controls"><button class="gal-btn gal-prev" aria-label="Previous image">‹</button><span class="gal-count"></span><button class="gal-btn gal-next" aria-label="Next image">›</button></div>
+            </div>
+        <p>The Printato is a hand printing press built from household objects, made for prints where variation becomes part of the art. Our client, Dr. Alice Boone, asked for a press that could be made at home and still leave room for error and creativity, instead of producing identical prints.</p>
+        <p>User observations showed that pressing by hand took a lot of force and produced uneven pressure and inconsistent placement. We used a potato masher as the stamp, since its head spreads force evenly. A hinged lever with an extendable rail controls where the print lands, and a lazy susan base lets the user rotate the lever 360 degrees to print anywhere on the paper.</p>
+        <p>Velcro on the stamp lets users swap attachments, from bubble wrap to cardboard to any texture they stick on, and the velcro pieces come off for cleaning. We built the base board with a square grid on its wipe-down cover so users can line up paper with the press on purpose, and the cover catches paint so mess stays easy to clean after user observations showed it was a concern. Mockup testing showed that the rotating base made the press more versatile and easier to use. I led the design process, from ideation and user observations through mockup testing and the final prototype.</p>
+        <ul class="tags"><li>Prototyping</li><li>User Testing</li><li>Design Thinking</li><li>Household Objects</li></ul>
+        <a class="btn report-link" href="reports/printato-final-report.pdf" target="_blank" rel="noopener">Read the full report (PDF)</a>
+      </article>
+    </section>
+
+  </main>
+
+  <footer class="site-footer" id="footer">
+    <div class="container">
+      <span>© 2026 Crystal Cooper</span>
+      <span>
+        <a href="mailto:crystalcooper2027@u.northwestern.edu">Email</a> ·
+        <a href="https://linkedin.com/in/crystalcooperr" target="_blank" rel="noopener">LinkedIn</a> ·
+        <a href="resume.pdf" target="_blank" rel="noopener">Resume</a>
+      </span>
+    </div>
+  </footer>
+
+  <div class="expand-modal" id="expand-modal" hidden><div class="expand-panel" id="expand-panel"></div></div>
+
+  <div class="lightbox" id="lightbox" hidden>
+    <img id="lb-img" alt="">
+    <p id="lb-cap"></p>
+  </div>
+
+  <script>
+    // Page routing by URL hash
+    var pages = ['home', 'projects', 'experience', 'contact', 'gearbox', 'calipers', 'smartreach', 'flatpack', 'printato'];
+    function showPage() {
+      var id = window.location.hash.replace('#', '') || 'home';
+      if (pages.indexOf(id) === -1) id = 'home';
+      pages.forEach(function (p) {
+        document.getElementById(p).classList.toggle('show', p === id);
+      });
+      document.querySelectorAll('.site-nav a').forEach(function (a) {
+        a.classList.toggle('active', a.dataset.page === id);
+      });
+      window.scrollTo(0, 0);
+    }
+    window.addEventListener('hashchange', showPage);
+    showPage();
+
+    // Image galleries: one image at a time with prev/next and a counter
+    document.querySelectorAll('[data-gallery]').forEach(function (g) {
+      var items = g.querySelectorAll('.gal-item');
+      var controls = g.querySelector('.gal-controls');
+      var count = g.querySelector('.gal-count');
+      var idx = 0;
+      function show(i) {
+        idx = (i + items.length) % items.length;
+        items.forEach(function (el, n) { el.classList.toggle('active', n === idx); });
+        if (count) count.textContent = (idx + 1) + ' / ' + items.length;
+      }
+      if (items.length < 2 && controls) controls.style.display = 'none';
+      if (controls) {
+        g.querySelector('.gal-prev').addEventListener('click', function () { show(idx - 1); });
+        g.querySelector('.gal-next').addEventListener('click', function () { show(idx + 1); });
+      }
+      show(0);
+    });
+
+    // Featured project carousel
+    (function () {
+      var carousel = document.getElementById('carousel');
+      var slides = carousel.querySelectorAll('.slide');
+      var dotsWrap = document.getElementById('dots');
+      var counter = document.getElementById('counter');
+      var current = 0;
+
+      slides.forEach(function (_, i) {
+        var b = document.createElement('button');
+        b.className = 'dot';
+        b.setAttribute('aria-label', 'Show project ' + (i + 1));
+        b.addEventListener('click', function () { go(i); });
+        dotsWrap.appendChild(b);
+      });
+
+      function go(i) {
+        current = (i + slides.length) % slides.length;
+        slides.forEach(function (s, idx) { s.classList.toggle('active', idx === current); });
+        dotsWrap.querySelectorAll('.dot').forEach(function (d, idx) { d.classList.toggle('active', idx === current); });
+        counter.textContent = (current + 1) + ' / ' + slides.length;
+      }
+
+      document.getElementById('prev').addEventListener('click', function () { go(current - 1); });
+      document.getElementById('next').addEventListener('click', function () { go(current + 1); });
+      go(0);
+    })();
+
+    // Gallery setup for cloned cards in the expanded view
+    function initGallery(g) {
+      var items = g.querySelectorAll('.gal-item');
+      var controls = g.querySelector('.gal-controls');
+      var count = g.querySelector('.gal-count');
+      var idx = 0;
+      function show(i) {
+        idx = (i + items.length) % items.length;
+        items.forEach(function (el, n) { el.classList.toggle('active', n === idx); });
+        if (count) count.textContent = (idx + 1) + ' / ' + items.length;
+      }
+      if (items.length < 2 && controls) controls.style.display = 'none';
+      if (controls) {
+        g.querySelector('.gal-prev').addEventListener('click', function () { show(idx - 1); });
+        g.querySelector('.gal-next').addEventListener('click', function () { show(idx + 1); });
+      }
+      show(0);
+    }
+
+    // Expand a project card into a larger view over a dimmed background
+    (function () {
+      var modal = document.getElementById('expand-modal');
+      var panel = document.getElementById('expand-panel');
+      function closeModal() { modal.hidden = true; panel.innerHTML = ''; }
+      document.addEventListener('click', function (e) {
+        var btn = e.target.closest('.expand-btn, .view-more');
+        if (btn) {
+          var clone;
+          if (btn.classList.contains('carousel-expand')) {
+            var activeSlide = document.querySelector('#carousel .slide.active');
+            var wrap = document.createElement('div');
+            wrap.className = 'card';
+            clone = activeSlide.cloneNode(true);
+            clone.classList.add('active');
+            wrap.appendChild(clone);
+            clone = wrap;
+          } else {
+            var card = btn.closest('.card');
+            clone = card.cloneNode(true);
+            clone.querySelectorAll('.expand-btn, .view-more').forEach(function (el) { el.remove(); });
+          }
+          panel.innerHTML = '';
+          var close = document.createElement('button');
+          close.className = 'expand-close';
+          close.setAttribute('aria-label', 'Close');
+          close.textContent = '×';
+          panel.appendChild(close);
+          panel.appendChild(clone);
+          clone.querySelectorAll('[data-gallery]').forEach(initGallery);
+          modal.hidden = false;
+          return;
+        }
+        if (e.target === modal || e.target.closest('.expand-close')) closeModal();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !modal.hidden) closeModal();
+      });
+    })();
+
+    // Click any gallery image to view it larger; click the dark background or press Esc to close
+    (function () {
+      var lb = document.getElementById('lightbox');
+      var lbImg = document.getElementById('lb-img');
+      var lbCap = document.getElementById('lb-cap');
+      function open(img) {
+        var cap = img.closest('.gal-item');
+        var capEl = cap ? cap.querySelector('.gal-cap') : null;
+        lbImg.src = img.src;
+        lbImg.alt = img.alt;
+        lbCap.textContent = capEl ? capEl.textContent : '';
+        lb.hidden = false;
+      }
+      function close() { lb.hidden = true; lbImg.src = ''; }
+      document.addEventListener('click', function (e) {
+        var img = e.target.closest('.gal-item img');
+        if (img) { open(img); return; }
+        if (e.target === lb) close();
+      });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && !lb.hidden) close();
+      });
+    })();
+  </script>
+
+</body>
+</html>
